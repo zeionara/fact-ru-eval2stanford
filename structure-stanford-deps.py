@@ -39,7 +39,7 @@ def get_phrase_types(tree):
 	for i in range(len(tree)):
 		for node in tree:
 			if node[2][1] - 1 == i:
-				yield f'{node[2][0]} {get_phrase_type(node[2], tree)}'
+				yield f'{node[2][0]} {get_phrase_type(node[2], tree)} {node[2][2]}'
 
 
 def read_pos(pos_tag_file):
@@ -82,6 +82,8 @@ for line in read_lines(STANFORD_DEPS_FILE):
 		# })
 		sentences.append(list(map(lambda i: decode_dependency(i, ['ROOT'] + list(map(lambda token: token.split('PartOfSpeech=')[1].replace(']', ''), sentence[:sentence.index('')]))), sentence[sentence.index('') + 2:])))
 		sentence = []
+sentence = sentence[3:-1]
+sentences.append(list(map(lambda i: decode_dependency(i, ['ROOT'] + list(map(lambda token: token.split('PartOfSpeech=')[1].replace(']', ''), sentence[:sentence.index('')]))), sentence[sentence.index('') + 2:])))
 #print(sentences[-1])
 #print(len(sentences))
 #print(sentences[0])

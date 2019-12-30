@@ -19,6 +19,7 @@ java -cp "/home/dima/CoreNLP/target/classes" edu.stanford.nlp.parser.nndep.Depen
 java -cp "/home/dima/CoreNLP/target/classes" edu.stanford.nlp.pipeline.StanfordCoreNLP -annotators tokenize,ssplit,pos,depparse -keepPunct edu.stanford.nlp.trees.international.russian.RussianTreebankLanguagePack \
 -embedFile /home/dima/models/ArModel100.txt \
 -embeddingSize 100 \
+-tokenize.whitespace True \
 -parse EnhancedDependenciesAnnotation \
 -depparse.model /home/dima/models/nndep.rus.modelAr100HS400.txt.gz \
 -language Russian \

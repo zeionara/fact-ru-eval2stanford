@@ -1,9 +1,9 @@
 from convert import read_lines, write_lines
 
-POS_FILE = 'pos.tag'
+POS_FILE = 'stanford-ner-corpus.txt'
 PHRASE_TYPES_FILE = 'phrase_types.txt'
 
-pos_tokens = list(map(lambda line: line.split('\t')[0], read_lines(POS_FILE)))
+pos_tokens = list(map(lambda line: line.split(' ')[0], read_lines(POS_FILE)))
 phrase_types = list(map(lambda line: line.split(' ')[0], read_lines(PHRASE_TYPES_FILE)))
 
 counter = 1000

@@ -28,7 +28,7 @@ Result will be stored in the file `stanford-ner-corpus.txt` in the following for
 ### Prerequisites
 1. Stanford CoreNLP
 2. POS tagger model
-### Perform tagging
+### Perform tagging [deprecated - feel free to proceed to the next stage if you are not interested in extracting entities separately from dependencies]
 ```sh
 java -cp "/home/dima/CoreNLP/target/classes" edu.stanford.nlp.tagger.maxent.MaxentTagger -model /home/dima/models/russian-ud-pos.tagger -textFile text.txt -outputFormat tsv -outputFile pos.tag
 ``` 
@@ -53,7 +53,7 @@ As a result you'll have got a 'pos.tag' file in the following format:
 Курильские	ADJ
 острова	NOUN
 ```
-### Merge POS tags with entities
+### Merge POS tags with entities [deprecated - feel free to proceed to the next stage if you are not interested in extracting entities separately from dependencies]
 ```sh
 python3 merge-pos-with-entities.py
 ```
@@ -146,5 +146,38 @@ This will output dependency tree for each sentence in the following format to th
 )
 
 ```
-### Translate dependency tree into consistency structure
-TODO: Encountered problem with different tokenization and consequent alignment errors in `facts-ru-eval` and `stanford corenlp`.
+And constituency structures along with `POS` tags to file `phrase-types.txt`.  
+You need to manually find and delete repeatings using regexp `^(.*)(\r?\n\1)+$`.
+### Merge POS tags and Constituency info with entities
+```sh
+python3 merge-pos-and-constituency-with-entities.py
+```
+As a result you'll have got a joined file `stanford-ner-corpus-pos.txt` with both - POS tags and entity tags in the following format:  
+```
+равительство NOUN NP Org
+Японии PROPN NP Org
+выразило VERB VP O
+решительный ADJ NP O
+протест NOUN NP O
+против ADP NP O
+состоявшегося VERB VP O
+в ADP NP O
+пятницу NOUN NP O
+визита NOUN NP O
+российского ADJ NP O
+министра NOUN NP O
+обороны NOUN NP O
+, PUNCT VP O
+посетившего VERB VP O
+южные ADJ NP Location
+Курильские ADJ NP Location
+острова NOUN NP Location
+, PUNCT VP O
+которые PRON VP O
+и PART VP O
+Япония PROPN VP LocOrg
+, PUNCT VP O
+и CCONJ VP O
+Россия PROPN VP LocOrg
+```  
+which can be used in transformers-ner.
