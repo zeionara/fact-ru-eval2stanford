@@ -152,6 +152,10 @@ You need to manually find and delete repeatings using regexp `^(.*)(\r?\n\1)+$`.
 ```sh
 python3 merge-pos-and-constituency-with-entities.py
 ```
+To merge and split into test, dev and train at once:
+```sh
+python3 merge.py --train 0.7 --test 0.15
+```
 As a result you'll have got a joined file `stanford-ner-corpus-pos.txt` with both - POS tags and entity tags in the following format:  
 ```
 равительство NOUN NP Org
