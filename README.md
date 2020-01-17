@@ -1,4 +1,21 @@
 # Usage
+## TL;DR
+```sh
+python3 convert.py /home/dima/factRuEval-2016/devset /home/dima/factRuEval-2016/testset
+python3 get-text.py
+java -cp "/home/dima/CoreNLP/target/classes" edu.stanford.nlp.pipeline.StanfordCoreNLP -annotators tokenize,ssplit,pos,depparse -keepPunct edu.stanford.nlp.trees.international.russian.RussianTreebankLanguagePack \
+-embedFile /home/dima/models/ArModel100.txt \
+-embeddingSize 100 \
+-parse EnhancedDependenciesAnnotation \
+-depparse.model /home/dima/models/nndep.rus.modelAr100HS400.txt.gz \
+-language Russian \
+-textFile text.txt \
+-outFile dep-puncts.txt \
+-pos.model /home/dima/models/russian-ud-pos.tagger
+python3 structure-stanford-deps.py
+python3 merge.py --train 0.7 --test 0.15
+# resolving merge conflicts by editing stanford-ner-corpus.txt and rerunning previous command several times
+```
 ## Convert fact ru eval data to stanford format
 ```sh
 python3 convert.py /home/dima/factRuEval-2016/devset/
@@ -157,7 +174,7 @@ To merge and split into test, dev and train at once:
 python3 merge.py --train 0.7 --test 0.15
 ```
 As a result you'll have got a joined file `stanford-ner-corpus-pos.txt` with both - POS tags and entity tags in the following format:  
-```
+```sh
 равительство NOUN NP Org
 Японии PROPN NP Org
 выразило VERB VP O
