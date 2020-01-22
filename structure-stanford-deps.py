@@ -85,7 +85,10 @@ if __name__ == '__main__':
 		else:
 			sentence = sentence[3:-1]
 			#print(sentence)
-			if len(sentence) == 0:
+			#print(len(sentence))
+			#print(sentence)
+			if len(sentence) <= 4:
+				sentence = []
 				continue
 			#print(sentence[sentence.index('') + 2:])
 			#print(sentence[3:sentence.index('')])
@@ -96,14 +99,15 @@ if __name__ == '__main__':
 			# })
 			sentences.append(list(map(lambda i: decode_dependency(i, ['ROOT'] + list(map(lambda token: token.split('PartOfSpeech=')[1].replace(']', ''), sentence[:sentence.index('')]))), sentence[sentence.index('') + 2:])))
 			sentence = []
-	print(last_line)
+	#print(last_line)
 	sentence = sentence[3:]
-	print(sentence)
+	#print(sentence)
 	sentences.append(list(map(lambda i: decode_dependency(i, ['ROOT'] + list(map(lambda token: token.split('PartOfSpeech=')[1].replace(']', ''), sentence[:sentence.index('')]))), sentence[sentence.index('') + 2:])))
 	#print(sentences[-1])
 	#print(len(sentences))
 	#print(sentences[0])
 
+	#print(sentences)
 	dep_tree = []
 	phrase_types = ['-DOCSTART- -X- -X- O', '']
 	last_sentence = ''
@@ -122,8 +126,8 @@ if __name__ == '__main__':
 		# Add empty line to split sentences
 		phrase_types.append('')
 		last_sentence = sentence
-	print(phrase_types[-100:])
-	print(last_sentence)
+	#print(phrase_types[-100:])
+	#print(last_sentence)
 	#print(dep_tree)
 	#print(list())
 	#print(len(phrase_types))
